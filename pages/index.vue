@@ -1,10 +1,6 @@
 <template>
   <div>
-    <!-- Include the Home component -->
-    <home></home>
-
-    <!-- Include the Login component -->
-    <login></login>
+    <login @login="handleLogin"></login>
   </div>
 </template>
 
@@ -16,9 +12,20 @@ export default {
   components: {
     Home,
     Login
-  }
+  },
+  methods: {
+    handleLogin(formData) {
+      console.log('Form Data in AnotherPage:', formData);
+
+      const { name, password } = formData;
+
+      console.log('Name:', name);
+      console.log('Password:', password);
+    },
+  },
 }
 </script>
+
 
 <style scoped>
 @font-face {
