@@ -1,32 +1,32 @@
 <template>
-  <div class="flex items-center justify-center w-screen h-screen bg-sch select-none">
-    <div class="grid w-2/6 grid-cols-2 rounded h-3/4 grid-rows-7 select-none bg-rot drop-shadow-2xl">
-      <div class="flex items-center col-span-2 row-span-2">
-        <h1 class="p-4 m-4 text-whi text-8xl c3 select-none">Login</h1>
+  <div class="flex items-center justify-center min-h-screen bg-sch select-none">
+    <div class="grid w-full md:w-2/3 lg:w-1/2 grid-cols-1 md:grid-cols-1 rounded h-3/4 md:h-auto grid-rows-7 select-none bg-rot drop-shadow-2xl">
+      <div class="flex items-center col-span-2 md:col-span-1 row-span-2">
+        <h1 class="p-4 m-4 text-whi text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl c3 select-none">Login</h1>
       </div>
-      <form @submit.prevent="handleSubmit" class="col-span-2 row-span-4 mx-7 h-full">
-        <div class="flex items-start justify-center col-span-2 row-span-1 mb-8">
+      <form @submit.prevent="handleSubmit" class="col-span-2 md:col-span-1 row-span-4 mx-4 md:mx-7 h-full">
+        <div class="flex items-start justify-center col-span-2 row-span-1 mb-4 md:mb-8">
           <input
             v-model="name"
             type="text"
-            class="p-4 border-rot w-full outline-none bg-old text-sch c3 drop-shadow-2xl m-2 rounded"
-            placeholder="N a m e"
+            class="p-4 border-rot w-full outline-none bg-old text-sch c3 drop-shadow-xl m-2 rounded text-xl"
+            placeholder="Name"
             id="input1"
           />
         </div>
-        <div class="flex items-center justify-end col-span-2 row-span-1 mb-8">
+        <div class="flex items-center justify-end col-span-2 row-span-1 mb-4 md:mb-8">
           <input
             v-model="password"
             type="password"
-            class="p-4 border-rot w-full outline-none bg-old text-sch c3 drop-shadow-2xl m-2 rounded"
-            placeholder="P a s s w o r d"
+            class="p-4 border-rot w-full outline-none bg-old text-sch c3 drop-shadow-3xl m-2 rounded text-xl"
+            placeholder="Password"
             id="input2"
           />
         </div>
         <div class="col-span-2 row-span-1"></div>
         <div class="flex items-end justify-center col-span-2 row-span-1">
           <button
-            class="p-4 m-2 rounded w-full outline-none c3 cursor-pointer transition ease-in text-2xl duration-300 drop-shadow-2xl"
+            class="p-4 m-2 rounded w-full md:w-full xl:w-full outline-none c3 cursor-pointer transition ease-in text-xl md:text-2xl lg:text-3xl duration-300 drop-shadow-2xl"
             id="button1"
             type="submit"
           >
@@ -51,7 +51,7 @@ export default {
   methods: {
     handleSubmit() {
       const match = jsonData.some(item => item.name === this.name && item.password === this.password);
-      if (match) {
+      if (match && name !== " " || match && match.password) {
         this.sendData();
       } else {
         this.clearForm();
@@ -76,6 +76,7 @@ export default {
 
 
 <style scoped>
+
 #button1{
   background-color: #223843;
   color: #D8B4A0;
