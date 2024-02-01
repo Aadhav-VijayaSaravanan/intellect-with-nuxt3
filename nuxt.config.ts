@@ -12,7 +12,8 @@ export default defineNuxtConfig({
             "old": "#D8B4A0",
             "cad": "#DBD3D8",
             "whi": "#EFF1F3",
-            "sch": "#223843"
+            "sch": "#223843",
+            "but": "#ffa272",
           },
           fontFamily: {
             custom1: ['CustomFont1', 'sans-serif'],

@@ -7,6 +7,7 @@
 <script>
 import Home from './home';
 import Login from './login';
+import data from '@/data/data.json'
 
 export default {
   components: {
@@ -15,12 +16,8 @@ export default {
   },
   methods: {
     handleLogin(formData) {
-      console.log('Form Data in AnotherPage:', formData);
-
-      const { name, password } = formData;
-
-      console.log('Name:', name);
-      console.log('Password:', password);
+      let { name, password } = formData;
+      console.log('Form Data in AnotherPage:', name, password);
     },
   },
 }

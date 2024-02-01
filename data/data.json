@@ -1,0 +1,42 @@
+[
+    {
+        "name": "john",
+        "password": "john"
+    },
+    {
+        "name": "alice",
+        "password": "alice"
+    },
+    {
+        "name": "bob",
+        "password": "bob"
+    },
+    {
+        "name": "eva",
+        "password": "eva"
+    },
+    {
+        "name": "charlie",
+        "password": "charlie"
+    },
+    {
+        "name": "lily",
+        "password": "lily"
+    },
+    {
+        "name": "david",
+        "password": "david"
+    },
+    {
+        "name": "sophie",
+        "password": "sophie"
+    },
+    {
+        "name": "michael",
+        "password": "michael"
+    },
+    {
+        "name": "emma",
+        "password": "emma"
+    }
+]
