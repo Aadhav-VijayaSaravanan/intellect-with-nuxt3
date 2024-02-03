@@ -9,14 +9,26 @@
           <div class="bg-lie row-span-5 col-span-1 rounded-lg border-4 border-sch drop-shadow-xl"></div>
         </div>
         <div class="bg-rot col-span-2 row-span-2 rounded-md drop-shadow-xl"></div>
-        <div class="bg-rot rounded-md drop-shadow-xl"></div>
+        <div class="bg-rot rounded-md drop-shadow-xl">
+          <div class="p-4 w-full h-full flex items-end">
+            <div class="h-fit w-full relative flex justify-between">
+              <h1 class="c3 text-5xl text-lie select-none w-fit">E x a m s</h1>
+              <div class="arrow-container rounded-full bg-lie w-10 h-10 flex items-center justify-center border-4 border-lie" style="transform: rotate(-90deg);">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-rot c3 h-8 w-8">
+                  <path d="M10 12.586L14.293 8.293a1 1 0 011.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 011.414-1.414L10 12.586z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="bg-lie rounded-md drop-shadow-xl">
-          <div class="p-4 grid grid-cols-1 grid-rows-6 w-full h-full">
-            <div class="col-span-1 row-span-5"></div>
-            <div class="col-span-1 row-span-1 flex items-end">
-              <h1 class="c3 text-4xl text-sch">C o u r s e s</h1>
-              <div class="rounded-full bg-transparent w-10 h-10 flex items-center justify-center ml-auto my-auto border-4 border-sch">
-                <button class="text-sch c3 text-3xl">></button>
+          <div class="p-4 w-full h-full flex items-end">
+            <div class="h-fit w-full relative flex justify-between">
+              <h1 class="c3 text-5xl text-sch select-none w-fit">C o u r s e s</h1>
+              <div class="arrow-container rounded-full bg-sch w-10 h-10 flex items-center justify-center border-4 border-sch" style="transform: rotate(-90deg);">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="text-lie c3 h-8 w-8">
+                  <path d="M10 12.586L14.293 8.293a1 1 0 011.414 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 011.414-1.414L10 12.586z"/>
+                </svg>
               </div>
             </div>
           </div>
@@ -24,16 +36,24 @@
       </div>
     </div>
   </div>
+  
+  <login v-if="showLogin" @login="handleLogin"></login>
 </template>
-
-
-
 <script>
+import Login from './login.vue';
 
+export default {
+  components: {
+    Login,
+  },
+  data() {
+    
+    return {
+      showLogin: false,
+    };
+  },
+};
 </script>
-
-
-
 <style scoped>
 
 @font-face {
