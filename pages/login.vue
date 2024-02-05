@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center min-h-screen bg-sch select-none">
-    <div class="grid w-full md:w-2/3 lg:w-1/2 grid-cols-1 md:grid-cols-1 rounded h-3/4 md:h-auto grid-rows-7 select-none bg-rot drop-shadow-2xl">
+    <div class="grid w-full md:w-2/3 lg:w-2/5 grid-cols-1 md:grid-cols-1 rounded h-3/4 md:h-auto grid-rows-7 select-none bg-rot drop-shadow-2xl">
       <div class="flex items-center col-span-2 md:col-span-1 row-span-2">
         <h1 class="p-4 m-4 text-white text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl c3 select-none">Login</h1>
       </div>
@@ -57,7 +57,6 @@ export default {
         this.sendData();
       } else {
         this.clearForm();
-        document.getElementById("input1").style.borderColor = "red";
       }
     },
     sendData() {
@@ -65,7 +64,6 @@ export default {
         name: this.name,
         password: this.password,
       });
-      this.clearForm();
     },
     clearForm() {
       this.name = '';
