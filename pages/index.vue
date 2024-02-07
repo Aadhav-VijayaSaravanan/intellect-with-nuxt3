@@ -12,11 +12,6 @@ export default {
 };
 </script>
 
-
-
-
-
-
 <style scoped>
 @font-face {
   font-family: 'CustomFont1';

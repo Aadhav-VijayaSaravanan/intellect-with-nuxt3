@@ -42,12 +42,14 @@
 
 <script setup>
 import { ref } from 'vue';
-import { collection, onSnapshot, updateDoc, doc } from 'firebase/firestore';
-import cookieData from '~/data/cookie.json';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const name = ref('');
 const password = ref('');
 const userData = ref([]);
+const userId = ref(null);
 
 const { firestore } = useFirebase();
 const collectionRef = collection(firestore, 'user');
@@ -72,25 +74,20 @@ const handleSubmit = async () => {
     console.log('Authentication successful');
     console.log('Document ID:', userRef.id);
     console.log('User data:', userRef);
+    
+    userId.value = userRef.id;
 
-    // Update authentication status
-    try {
-      await updateDoc(doc(firestore, 'user', userRef.id), {
-        auth: true
-      });
-      console.log('Authentication status updated successfully');
-      setTimeout(() => {
-        window.location.href = '/home';
-      }, 1000);
-    } catch (error) {
-      console.error('Error updating authentication status:', error);
-    }
+    router.push({ name: 'home', query: { userId: userId.value.toString() } });
+    console.log("Redirecting to home with userId:", userId);
+
   } else {
     console.log('Authentication failed');
   }
 };
 
 </script>
+
+
 
 
 <style scoped>

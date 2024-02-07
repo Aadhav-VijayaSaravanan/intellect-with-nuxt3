@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="w-screen h-screen bg-sch">
-      <div class="grid grid-cols-4 grid-rows-3 w-full h-full gap-4 p-4" v-if="showMain">
+      <div class="grid grid-cols-4 grid-rows-3 w-full h-full gap-4 p-4">
         <div class="bg-old col-span-2 row-span-2 rounded-md drop-shadow-xl"></div>
         <div class="bg-whi col-span-2 row-span-1 rounded-md drop-shadow-xl p-4 grid grid-rows-6 grid-cols-4">
-          <h1 class="c3 text-sch text-4xl select-none row-span-1 col-span-4 w-full h-full drop-shadow-xl">Good evening, {{ dataData }}!</h1>
+          <h1 class="c3 text-sch text-4xl select-none row-span-1 col-span-4 w-full h-full drop-shadow-xl">Good evening, {{ userName }}!</h1>
           <div class="bg-lie row-span-5 col-span-3 mr-4 rounded-lg border-4 border-sch drop-shadow-xl"></div>
           <div class="bg-lie row-span-5 col-span-1 rounded-lg border-4 border-sch drop-shadow-xl"></div>
         </div>
-        <div class="bg-rot col-span-2 row-span-2 rounded-md drop-shadow-xl"></div>
+        <div class="bg-rot col-span-2 row-span-2 rounded-md drop-shadow-xl"><pre v-if="userId">User ID: {{ userId }}</pre></div>
         <div class="bg-rot rounded-md drop-shadow-xl">
           <div class="p-4 w-full h-full flex items-end">
             <div class="h-fit w-full relative flex justify-between">
@@ -36,35 +36,50 @@
       </div>
     </div>
   </div>
-  
-  <login v-if="showLogin" @loginSuccess="done"></login>
 </template>
 
-<script>
-import Login from './login.vue';
-import cookieData from '~/data/cookie.json';
+<script setup>
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { collection, onSnapshot, doc, getDoc } from 'firebase/firestore';
 
-export default {
-  components: {
-    Login,
-  },
-  data() {
-    return {
-      showLogin: false,
-      showMain: true,
-      dataData: null,
-    };
-  },
-  methods: {
-    onLoginSuccess() {
-      console.log("Login successful!");
-      // Handle any logic you need after successful login
-    }
-  },
-};
+const userData = ref([]);
+const userName = ref(''); // Define a reactive variable for the user's name
+
+const { firestore } = useFirebase();
+const collectionRef = collection(firestore, 'user');
+
+onSnapshot(collectionRef, (querySnapshot) => {
+  const users = [];
+  querySnapshot.forEach((doc) => {
+    const user = doc.data();
+    user.id = doc.id;
+    users.push(user);
+  });
+  userData.value = users;
+});
+
+const router = useRouter();
+
+const userId = router.currentRoute.value.query.userId;
+
+if (userId) {
+  const userDocRef = doc(firestore, 'user', userId);
+  getDoc(userDocRef)
+    .then((doc) => {
+      if (doc.exists()) {
+        const userData = doc.data();
+        userName.value = userData.name;
+        console.log('Name:', userName.value);
+      } else {
+        console.log('No such document!');
+      }
+    })
+    .catch((error) => {
+      console.error('Error getting document:', error);
+    });
+}
 </script>
-
-
 
 <style scoped>
 
