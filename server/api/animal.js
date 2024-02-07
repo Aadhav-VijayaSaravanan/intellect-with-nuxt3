@@ -1,8 +1,8 @@
 import { firestore } from '../utils/firebase';
 
 export default defineEventHandler(async event => { 
-    const ref = firestore.doc(`user/user1`);
-    const snapshot = await ref.get();
-    const data = snapshot.data();
+    const collectionRef = firestore.collection('user');
+    const snapshot = await collectionRef.get();
+    const data = snapshot.docs.map(doc => doc.data());
     return data;
 })

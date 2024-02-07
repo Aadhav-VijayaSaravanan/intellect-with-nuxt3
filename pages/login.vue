@@ -40,39 +40,57 @@
   </div>
 </template>
 
-<script>
-import jsonData from '@/data/data.json';
+<script setup>
+import { ref } from 'vue';
+import { collection, onSnapshot, updateDoc, doc } from 'firebase/firestore';
+import cookieData from '~/data/cookie.json';
 
-export default {
-  data() {
-    return {
-      name: '',
-      password: '',
-    };
-  },
-  methods: {
-    handleSubmit() {
-      const match = jsonData.some(item => item.name === this.name && item.password === this.password);
-      if (match && name !== " " || match && match.password) {
-        this.sendData();
-      } else {
-        this.clearForm();
-      }
-    },
-    sendData() {
-      this.$emit('login', {
-        name: this.name,
-        password: this.password,
+const name = ref('');
+const password = ref('');
+const userData = ref([]);
+
+const { firestore } = useFirebase();
+const collectionRef = collection(firestore, 'user');
+
+onSnapshot(collectionRef, (querySnapshot) => {
+  const users = [];
+  querySnapshot.forEach((doc) => {
+    const user = doc.data();
+    user.id = doc.id;
+    users.push(user);
+  });
+  userData.value = users;
+});
+
+const handleSubmit = async () => {
+  const enteredName = name.value;
+  const enteredPassword = password.value;
+
+  const userRef = userData.value.find(user => user.name === enteredName && user.password === enteredPassword);
+
+  if (userRef) {
+    console.log('Authentication successful');
+    console.log('Document ID:', userRef.id);
+    console.log('User data:', userRef);
+
+    // Update authentication status
+    try {
+      await updateDoc(doc(firestore, 'user', userRef.id), {
+        auth: true
       });
-    },
-    clearForm() {
-      this.name = '';
-      this.password = '';
-    },
-  },
+      console.log('Authentication status updated successfully');
+      setTimeout(() => {
+        window.location.href = '/home';
+      }, 1000);
+    } catch (error) {
+      console.error('Error updating authentication status:', error);
+    }
+  } else {
+    console.log('Authentication failed');
+  }
 };
-</script>
 
+</script>
 
 
 <style scoped>
