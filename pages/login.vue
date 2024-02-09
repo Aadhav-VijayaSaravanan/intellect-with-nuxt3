@@ -76,7 +76,7 @@ const handleSubmit = async () => {
     console.log('User data:', userRef);
     
     userId.value = userRef.id;
-
+    
     router.push({ name: 'home', query: { userId: userId.value.toString() } });
     console.log("Redirecting to home with userId:", userId);
 
@@ -86,9 +86,6 @@ const handleSubmit = async () => {
 };
 
 </script>
-
-
-
 
 <style scoped>
 

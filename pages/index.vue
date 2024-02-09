@@ -4,6 +4,7 @@
 
 <script>
 import Login from './login.vue';
+import content from './content.vue';
 
 export default {
   components: {

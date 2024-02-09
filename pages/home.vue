@@ -8,7 +8,7 @@
           <div class="bg-lie row-span-5 col-span-3 mr-4 rounded-lg border-4 border-sch drop-shadow-xl"></div>
           <div class="bg-lie row-span-5 col-span-1 rounded-lg border-4 border-sch drop-shadow-xl"></div>
         </div>
-        <div class="bg-rot col-span-2 row-span-2 rounded-md drop-shadow-xl"><pre v-if="userId">User ID: {{ userId }}</pre></div>
+        <div class="bg-rot col-span-2 row-span-2 rounded-md drop-shadow-xl p-4"></div>
         <div class="bg-rot rounded-md drop-shadow-xl">
           <div class="p-4 w-full h-full flex items-end">
             <div class="h-fit w-full relative flex justify-between">
@@ -44,7 +44,7 @@ import { ref } from 'vue';
 import { collection, onSnapshot, doc, getDoc } from 'firebase/firestore';
 
 const userData = ref([]);
-const userName = ref(''); // Define a reactive variable for the user's name
+const userName = ref('');
 
 const { firestore } = useFirebase();
 const collectionRef = collection(firestore, 'user');
